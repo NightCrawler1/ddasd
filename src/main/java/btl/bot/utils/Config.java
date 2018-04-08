@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Config {
-    public String token , prefix;
+    public String token , prefix , loja;
     public List<String> owners;
 
     public Config(Path path)throws IOException{
@@ -22,6 +22,7 @@ public class Config {
                 try {
                     object.put("token", "");
                     object.put("prefix" , "!");
+                    object.put("loja" , "Coloque aqui o site.");
                     object.put("owners" , new ArrayList<>());
                     IOUtils.write(path , object.toString());
                 }catch (JSONException e){
@@ -33,6 +34,7 @@ public class Config {
         try{
             JSONObject json = new JSONObject(IOUtils.read(path));
             this.token = json.getString("token");
+            this.loja = json.getString("loja");
             this.owners = new ArrayList<>();
             for(Object o : json.getJSONArray("owners")){
                 if(o instanceof String)

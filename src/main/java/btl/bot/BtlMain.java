@@ -1,8 +1,9 @@
 package btl.bot;
 
+import br.com.brunoxkk0.btl.econ.Econ;
+import br.com.brunoxkk0.btl.gpp.ClaimBlocks;
 import btl.bot.commands.CommandTest;
-import btl.bot.commands.bot.ServerCommand;
-import btl.bot.commands.bot.ShutdownCommand;
+import btl.bot.commands.bot.*;
 import btl.bot.utils.Config;
 import com.jagrosh.jdautilities.commandclient.CommandClient;
 import com.jagrosh.jdautilities.commandclient.CommandClientBuilder;
@@ -24,7 +25,8 @@ import java.util.stream.Stream;
 public class BtlMain {
     public static String version = "@version@";
     private static BtlMain instance;
-    private final Config config;
+    private Config config;
+
 
     public static BtlMain getInstance(){
         return instance;
@@ -43,8 +45,12 @@ public class BtlMain {
         client.addCommands(new PingCommand(),
                            new CommandTest(),
                            new ShutdownCommand(),
-                           new ServerCommand()
+                           new ServerCommand(),
+                           new PlayerInfoCommand(),
+                           new ModpackCommand()
+
         );
+        client.setEmojis(":white_check_mark:" , ":warning:" , ":x:");
         client.setOwnerId("337425118450024450");
         client.useHelpBuilder(false);
         client.setGame(Game.watching("BTL Servers."));
@@ -59,7 +65,7 @@ public class BtlMain {
 
         instance = new BtlMain(c);
         new JDABuilder(AccountType.BOT)
-                .setToken("MzU2NTY0MzY2ODkzNjQ1ODI0.DJdL9Q._hrHykcesoDFBKrkJnnBIJnZxZM")
+                .setToken(c.token)
                 .setGame(Game.watching("BTL Servers."))
                 .addEventListener(createClient())
                 .setCorePoolSize(5)

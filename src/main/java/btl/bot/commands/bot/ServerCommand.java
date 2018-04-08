@@ -47,7 +47,7 @@ public class ServerCommand extends Command {
                 "Status: `Em construção.`\n" +
                 "ModPack: Em-breve." , false);
 
-        builder.setFooter("Caso precise de ajuda use o comando !modpacks" , null);
+        builder.setFooter("Caso precise de ajuda use o comando ??modpacks" , null);
         builder.setColor(Color.cyan);
         event.reply(builder.build());
 
